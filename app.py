@@ -13,11 +13,13 @@ def get_hash_md5(filename):
             m.update(data)
         return m.hexdigest()
 
-@app.route('/', methods=['GET'])
+@app.route('/')
 def home():
 	return render_template('index.html')
 
-@app.route('/files', methods=['GET'])
+# @app.route('/api', methods = ['GET'])
+
+@app.route('/api/files', methods=['GET', 'POST', 'DELETE'])
 def files():
 	return jsonify({'you_should': 'download_files'})
 
