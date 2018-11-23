@@ -22,10 +22,14 @@ def home():
 @app.route('/api/files', methods=['GET', 'POST', 'DELETE'])
 def files():
     if request.method == 'GET':
-        return jsonify({'you_should': 'download_files'})
-    elif request.method == 'DELETE':
+        if not request.args:
+            return jsonify({'you_should': 'download_files'})
+        elif 'hash' in request.args:
+            return jsonify({'you_better': 'than_most', 'you_can': 'download_file', 'hash': request.args['hash']})
+    if request.method == 'POST':
+        return jsonify({'you_cant': 'upload_files'})
+    if request.method == 'DELETE':
         return jsonify({'you_cant': 'delete_files'})
-    return jsonify({'you_should': 'download_files'})
 
 if __name__ == '__main__':
     app.run()
