@@ -21,7 +21,5 @@ def home():
 def files():
 	return jsonify({'you_should': 'download_files'})
 
-@app.route('/files')
-
 if __name__ == '__main__':
     app.run()
