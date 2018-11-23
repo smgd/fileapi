@@ -15,7 +15,7 @@ def get_hash_md5(filename):
 
 @app.route('/')
 def home():
-	return jsonify({'bla':'bla'})
+	return jsonify({'bla': 'bla'})
 
 @app.route('/files')
 def files():
