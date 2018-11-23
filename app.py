@@ -1,4 +1,4 @@
-from flask import Flask, url_for, send_file, request, jsonify
+from flask import Flask, url_for, send_file, request, jsonify, render_template
 import hashlib
 
 app = Flask(__name__)
@@ -13,13 +13,15 @@ def get_hash_md5(filename):
             m.update(data)
         return m.hexdigest()
 
-@app.route('/')
+@app.route('/', methods=['GET'])
 def home():
-	return jsonify({'bla': 'bla'})
+	return render_template('index.html')
 
-@app.route('/files')
+@app.route('/files', methods=['GET'])
 def files():
 	return jsonify({'you_should': 'download_files'})
+
+@app.route('/files')
 
 if __name__ == '__main__':
     app.run()
