@@ -21,7 +21,11 @@ def home():
 
 @app.route('/api/files', methods=['GET', 'POST', 'DELETE'])
 def files():
-	return jsonify({'you_should': 'download_files'})
+    if request.method == 'GET':
+        return jsonify({'you_should': 'download_files'})
+    elif request.method == 'DELETE':
+        return jsonify({'you_cant': 'delete_files'})
+    return jsonify({'you_should': 'download_files'})
 
 if __name__ == '__main__':
     app.run()
