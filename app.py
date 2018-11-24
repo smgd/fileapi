@@ -6,8 +6,6 @@ app = Flask(__name__)
 UPLOAD_DIR = '/home/soapman/Documents/code/py/fileapi/storage'
 app.config['DIR'] = UPLOAD_DIR
 
-
-
 @app.route('/')
 @app.route('/api')
 def home():
@@ -16,7 +14,7 @@ def home():
 @app.route('/api/files', methods=['GET', 'POST', 'DELETE'])
 def files():
     if request.method == 'POST':
-        return utils.save_file(request.files['file'])  
+        return utils.save_file(request.files['file'])
     elif request.args['hash']:
         if request.method == 'GET':
             return utils.give_file(request.args['hash'])
