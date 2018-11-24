@@ -1,6 +1,6 @@
 from flask import send_file, jsonify
 import os
-from daemon import app
+from src import app
 import hashlib
 
 def get_hash_md5(file):
@@ -60,4 +60,4 @@ def save_file(posted_file):
         posted_file.save(path)
         return jsonify({'you_have_uploaded': 'file', 'hash': file_hash})
     else:
-        return jsonify({'file_already': 'exists', 'hash': file_hash})
+return jsonify({'file_already': 'exists', 'hash': file_hash})
