@@ -59,5 +59,5 @@ def save_file(posted_file):
         new_path = make_path(file_hash)
         posted_file.save(path)
         return jsonify({'you_have_uploaded': 'file', 'hash': file_hash})
-    else
+    else:
         return jsonify({'file_already': 'exists', 'hash': file_hash})

@@ -3,8 +3,9 @@ import os
 import utils
 
 app = Flask(__name__)
-UPLOAD_DIR = '/home/soapman/Documents/code/py/fileapi/storage'
-app.config['DIR'] = UPLOAD_DIR
+# UPLOAD_DIR = '/home/soapman/Documents/code/py/fileapi/storage'
+app.config['DIR'] = os.path.join(os.getcwd(), '../storage')
+print(os.getcwd())
 
 @app.route('/')
 @app.route('/api')
