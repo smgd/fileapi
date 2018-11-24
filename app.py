@@ -33,8 +33,10 @@ def show_files():
 file_base = [file for file in show_files()]
 
 @app.route('/')
+@app.route('/api')
 def home():
-	return render_template('index.html')
+    return render_template('index.html')
+
 
 @app.route('/api/files', methods=['GET', 'POST', 'DELETE'])
 def files():
