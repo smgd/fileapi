@@ -14,20 +14,16 @@ def get_hash_md5(file):
         if not data:
             break
         m.update(data)
+    file.seek(0)
     return m.hexdigest()
 
 def save_file(file):
-    try:
-        os.mkdir(app.config['DIR'] + '/' + file[:2])
-    except:
-        pass
+    os.mkdir(app.config['DIR'] + '/' + file[:2])
     return os.path.join(app.config['DIR'], file[:2], file)
 
 @app.route('/')
 def home():
 	return render_template('index.html')
-
-# @app.route('/api', methods = ['GET'])
 
 @app.route('/api/files', methods=['GET', 'POST', 'DELETE'])
 def files():
@@ -44,16 +40,24 @@ def files():
     if request.method == 'POST':
         
         f = request.files['file']
+        print(f.read(2))
         hash_filename = get_hash_md5(f)
         if hash_filename not in file_base:
-            f.save(save_file(hash_filename))
+            path = save_file(hash_filename)
+            f.save(path)
             file_base.append(hash_filename)
             return jsonify({'you_have_uploaded': 'file', 'hash': hash_filename})
         else:
             return jsonify({'file_already': 'exists', 'hash': hash_filename})
     
     if request.method == 'DELETE':
-        return jsonify({'you_cant': 'delete_files'})
+        file = request.args['hash']
+        os.remove(os.path.join(app.config['DIR'], file[:2], file))
+        try:
+            os.rmdir(os.path.join(app.config['DIR'], file[:2]))
+        except:
+            pass
+        return jsonify({'you_have': 'deleted_file'})
 
 if __name__ == '__main__':
     app.run()
