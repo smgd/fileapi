@@ -1,6 +1,6 @@
 from flask import send_file, jsonify
 import os
-from app import app
+from daemon import app
 import hashlib
 
 def get_hash_md5(file):
