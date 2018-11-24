@@ -1,11 +1,6 @@
 from flask import Flask, url_for, send_file, request, jsonify, render_template
 import os
-import utils
-
-app = Flask(__name__)
-# UPLOAD_DIR = '/home/soapman/Documents/code/py/fileapi/storage'
-app.config['DIR'] = os.path.join(os.getcwd(), '../storage')
-print(os.getcwd())
+from src import utils, app
 
 @app.route('/')
 @app.route('/api')
@@ -23,6 +18,3 @@ def files():
             return utils.remove_file(request.args['hash'])
     else:
         return 'wrong_request'
-
-if __name__ == '__main__':
-    app.run()
