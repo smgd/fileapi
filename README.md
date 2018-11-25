@@ -1,6 +1,6 @@
 ## File Api
 
-### Requrements
+### Requirements
 
 *   python 3
 *   flask (`pip install flask`)
