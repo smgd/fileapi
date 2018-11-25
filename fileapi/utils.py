@@ -22,7 +22,7 @@ def get_hash_md5(file):
 def make_path(file_hash):
     """Create directory if needed and returns path for file"""
     try:
-        os.mkdir(os.path.join(app.config['DIR'], file_hash[:2]))
+        os.makedirs(os.path.join(app.config['DIR'], file_hash[:2]))
     except:
         pass
 
