@@ -19,9 +19,9 @@ class BaseException(Exception):
         return rv
 
 class BadRequest(BaseException):
-    message='Bad Request'
-    status_code=400
+    message = 'Bad Request'
+    status_code = 400
 
 class FileNotFound(BaseException):
-    message='File Not Found'
-    status_code=404
+    message = 'File Not Found'
+    status_code = 404
