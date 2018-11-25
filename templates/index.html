@@ -5,11 +5,18 @@
     <title>API Home Page</title>
 </head>
 <body>
-    <h2>
-        Hello
-    </h2>
-    <p>
-    	Here is information about API usage.
-    </p>
-</body>
+    <h2>File Api</h2>
+    <h3>Requrements</h3>
+	<ul>
+		<li>python 3</li>
+		<li>flask</li>
+	</ul>
+	<h3>Usage</h3>
+	<p>Execute <b>$ python app.py</b> to run the daemon (and server).</p>
+	<p>Then make requests to <b>http://127.0.0.1:5000/api/files</b>.</p>
+	<ul>
+		<li>POST request with file (file in form like <b>-F</b> parameter of <b>curl</b>) to <b>http://127.0.0.1:5000/api/files</b> will upload file to storage and send you back md5 hash of this file.</li>
+		<li>GET request with 'hash' parameter to <b>http://127.0.0.1:5000/api/files</b> will send you file back if it exists.</li>
+		<li>DELETE request with 'hash' parameter to <b>http://127.0.0.1:5000/api/files</b> will delete your file if it exists.</li>
+	</ul>
 </html>
