@@ -17,4 +17,4 @@ def files():
         if request.method == 'DELETE':
             return utils.remove_file(request.args['hash'])
     else:
-return 'wrong_request'
+        return 'wrong_request'
