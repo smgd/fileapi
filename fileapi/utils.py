@@ -2,21 +2,24 @@ from flask import send_file, jsonify
 import os
 from fileapi import app
 import hashlib
+from fileapi.exceptions import FileNotFound
 
 def get_hash_md5(file):
-    m = hashlib.md5()
+    """Return the md5 hashsum of the file"""
+    hash_counter = hashlib.md5()
 
     while True:
         data = file.read(8192)
         if not data:
             break
-        m.update(data)
+        hash_counter.update(data)
 
     file.seek(0)
 
-    return m.hexdigest()
+    return hash_counter.hexdigest()
 
 def make_path(file_hash):
+    """Create directory if needed and returns path for file"""
     try:
         os.mkdir(os.path.join(app.config['DIR'], file_hash[:2]))
     except:
@@ -25,18 +28,21 @@ def make_path(file_hash):
     return os.path.join(app.config['DIR'], file_hash[:2], file_hash)
 
 def existence(file_hash):
+    """Check the existence of a file"""
     path = os.path.join(app.config['DIR'], file_hash[:2], file_hash)
     return os.path.exists(path), path
 
 def give_file(file_hash):
+    """Send file or error to user"""
     file_status, path = existence(file_hash)
 
     if file_status:
         return send_file(path, as_attachment=True)
     else:
-        return jsonify({'error': 'file_not_found'})
+        raise FileNotFound()
 
 def remove_file(file_hash):
+    """Remove file and directory if empty"""
     file_status, path = existence(file_hash)
     
     if file_status:
@@ -47,17 +53,17 @@ def remove_file(file_hash):
         except:
             pass
 
-        return jsonify({'you_have': 'deleted_file'})
+        return jsonify({'status_code': '200'})
     else:
-        return 'file_not_found'
+        raise FileNotFound()
 
 def save_file(posted_file):
+    """Save file to storage"""
     file_hash = get_hash_md5(posted_file)
     file_status, path = existence(file_hash)
 
     if not file_status:
         new_path = make_path(file_hash)
         posted_file.save(path)
-        return jsonify({'you_have_uploaded': 'file', 'hash': file_hash})
-    else:
-        return jsonify({'file_already': 'exists', 'hash': file_hash})
+    
+    return jsonify({'status_code': '200', 'hash': file_hash})
