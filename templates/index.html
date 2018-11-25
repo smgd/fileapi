@@ -16,7 +16,7 @@
 	<p>Then make requests to <b>http://127.0.0.1:5000/api/files</b>.</p>
 	<ul>
 		<li>POST request with file (file in form like <b>-F</b> parameter of <b>curl</b>) to <b>http://127.0.0.1:5000/api/files</b> will upload file to storage and send you back md5 hash of this file.</li>
-		<li>GET request with 'hash' parameter to <b>http://127.0.0.1:5000/api/files</b> will send you file back if it exists.</li>
+		<li>GET request with 'hash' parameter to <b>http://127.0.0.1:5000/api/files</b> will send you file back if it exists (<b>http://127.0.0.1:5000/api/files?hash=4291d9011323bc51ecb3db1204f57979</b> for example).</li>
 		<li>DELETE request with 'hash' parameter to <b>http://127.0.0.1:5000/api/files</b> will delete your file if it exists.</li>
 	</ul>
 </html>
