@@ -1,6 +1,6 @@
 from flask import Flask, url_for, send_file, request, jsonify, render_template
 import os
-from src import utils, app
+from fileapi import utils, app
 
 @app.route('/')
 @app.route('/api')
