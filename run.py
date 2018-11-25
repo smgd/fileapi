@@ -1,4 +1,4 @@
-from src import app
+from fileapi import app
 
 if __name__ == '__main__':
 	app.run() 
